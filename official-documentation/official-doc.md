@@ -17,7 +17,7 @@ Link: [React JS](https://reactjs.org)
 
 ## A Simple Component
 
-React components implement a render() method that takes input data and returns what to display. 
+React components implement a render() method that takes input data and returns what to display.
 This example uses an XML-like syntax called JSX. Input data that is passed into the component can be accessed by render() via this.props.
 
 ```js
@@ -34,7 +34,7 @@ root.render(<HelloMessage name="Taylor" />);
 
 ## A Stateful Component
 
-In addition to taking input data (accessed via this.props), a component can maintain internal state data (accessed via this.state). 
+In addition to taking input data (accessed via this.props), a component can maintain internal state data (accessed via this.state).
 When a component’s state data changes, the rendered markup will be updated by re-invoking render().
 
 ```js
@@ -45,8 +45,8 @@ class Timer extends React.Component {
   }
 
   tick() {
-    this.setState(state => ({
-      seconds: state.seconds + 1
+    this.setState((state) => ({
+      seconds: state.seconds + 1,
     }));
   }
 
@@ -59,11 +59,7 @@ class Timer extends React.Component {
   }
 
   render() {
-    return (
-      <div>
-        Seconds: {this.state.seconds}
-      </div>
-    );
+    return <div>Seconds: {this.state.seconds}</div>;
   }
 }
 
@@ -74,15 +70,15 @@ root.render(<Timer />);
 
 ## An Application
 
-Using props and state, we can put together a small Todo application. 
-This example uses state to track the current list of items as well as the text that the user has entered. 
+Using props and state, we can put together a small Todo application.
+This example uses state to track the current list of items as well as the text that the user has entered.
 Although event handlers appear to be rendered inline, they will be collected and implemented using event delegation.
 
 ```js
 class TodoApp extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { items: [], text: '' };
+    this.state = { items: [], text: "" };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -93,17 +89,13 @@ class TodoApp extends React.Component {
         <h3>TODO</h3>
         <TodoList items={this.state.items} />
         <form onSubmit={this.handleSubmit}>
-          <label htmlFor="new-todo">
-            What needs to be done?
-          </label>
+          <label htmlFor="new-todo">What needs to be done?</label>
           <input
             id="new-todo"
             onChange={this.handleChange}
             value={this.state.text}
           />
-          <button>
-            Add #{this.state.items.length + 1}
-          </button>
+          <button>Add #{this.state.items.length + 1}</button>
         </form>
       </div>
     );
@@ -120,11 +112,11 @@ class TodoApp extends React.Component {
     }
     const newItem = {
       text: this.state.text,
-      id: Date.now()
+      id: Date.now(),
     };
-    this.setState(state => ({
+    this.setState((state) => ({
       items: state.items.concat(newItem),
-      text: ''
+      text: "",
     }));
   }
 }
@@ -133,7 +125,7 @@ class TodoList extends React.Component {
   render() {
     return (
       <ul>
-        {this.props.items.map(item => (
+        {this.props.items.map((item) => (
           <li key={item.id}>{item.text}</li>
         ))}
       </ul>
@@ -148,9 +140,9 @@ root.render(<TodoApp />);
 
 ## A Component Using External Plugins
 
-React allows you to interface with other libraries and frameworks. 
+React allows you to interface with other libraries and frameworks.
 This example uses remarkable, an external Markdown library, to convert the textarea’s value in real time.
-  
+
 ```js
 class MarkdownEditor extends React.Component {
   constructor(props) {
@@ -176,4 +168,4 @@ class MarkdownEditor extends React.Component {
 
 - [Babel](https://babeljs.io) - JavaScript Compiler
 
-
+** Note: This is not the official documentation site anymore. Switching to beta. **
