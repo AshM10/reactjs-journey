@@ -8,6 +8,13 @@ A JavaScript library for building user interfaces
 
 Link: [React JS](https://reactjs.org)
 
+## Table of Contents
+
+- [A Simple Component](#a-simple-component)
+- [A Stateful Component](#a-stateful-component)
+- [An Application](#an-application)
+- [A Component Using External Plugins](#a-component-using-external-plugins)
+
 ## A Simple Component
 
 React components implement a render() method that takes input data and returns what to display. 
