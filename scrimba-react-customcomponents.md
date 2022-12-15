@@ -42,3 +42,38 @@ ReactDOM.render(<LearnReact />, document.getElementById("root"))
 
 ![Screenshot 2022-12-15 at 2 29 53 PM](https://user-images.githubusercontent.com/89284873/207960632-f84db002-f282-4085-94e3-bbad64a704d2.png)
 
+## Challenge Part 2
+
+![Screenshot 2022-12-15 at 2 31 29 PM](https://user-images.githubusercontent.com/89284873/207960931-51256c6e-4e68-40e4-b814-bc24f2de0e8f.png)
+
+```js
+import React from "react"
+import ReactDOM from "react-dom"
+
+function Page() {
+    return (
+        <div>
+            <header>
+                <nav>
+                    <img src="./react-logo.png" width="40px" />
+                </nav>
+            </header>
+            <h1>Reasons I'm excited to learn React</h1>
+            <ol>
+                <li>It's a popular library, so I'll be 
+                able to fit in with the cool kids!</li>
+                <li>I'm more likely to get a job as a developer
+                if I know React</li>
+            </ol>
+            <footer>
+                <small>© 2022 Ash Moreno. All rights reserved.</small>
+            </footer>
+        </div>
+    )
+}
+
+ReactDOM.render(<Page />, document.getElementById("root"))
+```
+
+![Screenshot 2022-12-15 at 2 37 33 PM](https://user-images.githubusercontent.com/89284873/207962014-9a07531a-bc6b-4f5f-a9bc-10ed77ad0d99.png)
+
