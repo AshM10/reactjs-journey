@@ -111,5 +111,63 @@ function Header() {
 ReactDOM.render(Header(), document.getElementById("root"))
 ```
 
-- The function should be wrapped inside angle brackets like an HTML element, <Header />
+- The function should be wrapped inside angle brackets like an HTML element, 
+``` 
+<Header />
+```
 
+## Parent/Child Components
+
+### Mini Challenge
+![Screenshot 2022-12-15 at 2 47 58 PM](https://user-images.githubusercontent.com/89284873/207963791-14b9ca99-47b2-4dee-a34a-e5a4dbf9b18d.png)
+
+![Screenshot 2022-12-15 at 2 51 31 PM](https://user-images.githubusercontent.com/89284873/207964571-e1c4f68a-d31a-4327-b54b-daa9effda5cc.png)
+
+```js
+import React from "react"
+import ReactDOM from "react-dom"
+
+function Header() {
+    return (
+        <header>
+            <nav>
+                <img src="./react-logo.png" width="40px" />
+            </nav>
+        </header>
+    )
+}
+
+function MainContent() {
+    return (
+        <div className="MainContent">
+            <h1>Reasons I'm excited to learn React</h1>
+            <ol>
+                <li>It's a popular library, so I'll be 
+                able to fit in with the cool kids!</li>
+                <li>I'm more likely to get a job as a developer
+                if I know React</li>
+            </ol>
+        </div>
+    )
+}
+
+function Footer() {
+    return (
+            <footer>
+                <small>© 2022 Ash Moreno. All rights reserved.</small>
+            </footer>
+    )
+}
+
+function Page() {
+    return (
+        <div>
+            <Header />
+            <MainContent />
+            <Footer />
+        </div>
+    )
+}
+
+ReactDOM.render(<Page />, document.getElementById("root"))
+```
