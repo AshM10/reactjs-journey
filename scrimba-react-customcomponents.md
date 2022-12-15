@@ -77,3 +77,39 @@ ReactDOM.render(<Page />, document.getElementById("root"))
 
 ![Screenshot 2022-12-15 at 2 37 33 PM](https://user-images.githubusercontent.com/89284873/207962014-9a07531a-bc6b-4f5f-a9bc-10ed77ad0d99.png)
 
+## Custom Components Quiz
+
+Quiz!
+
+1. What is a React component?
+- Components are independent and reusable bits of code. They serve the same purpose as JavaScript functions, but work in isolation and return HTML. Components come in two types, Class components and Function components.
+- A function that returns React elements. (UI)
+
+2. What's wrong with this code?
+```
+function myComponent() {
+    return (
+        <small>I'm tiny text!</small>
+    )
+}
+```
+
+- It needs to be in Pascal Case.
+
+3. What's wrong with this code?
+```
+function Header() {
+    return (
+        <header>
+            <nav>
+                <img src="./react-logo.png" width="40px" />
+            </nav>
+        </header>
+    )
+}
+
+ReactDOM.render(Header(), document.getElementById("root"))
+```
+
+- The function should be wrapped inside angle brackets like an HTML element, <Header />
+
