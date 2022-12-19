@@ -186,3 +186,22 @@ ReactDOM.render(<Page />, document.getElementById("root"))
 
 ![Screenshot 2022-12-19 at 1 33 07 PM](https://user-images.githubusercontent.com/89284873/208505373-fcba7e32-6e80-4a91-8660-49cee3b06552.png)
 
+# Organize Components
+
+- it is important to have an organizational system that makes sense to you and your group, that is something you've agreed upon in the beginning and stick to as you develop.
+- directory should start with a capital letter, the same as the component itself.
+![Screenshot 2022-12-19 at 1 38 07 PM](https://user-images.githubusercontent.com/89284873/208506279-2cb5cb91-dc1b-4d49-8fc5-d9209b5b94c9.png)
+- import React
+- export default the component
+- import the component where you want it to be
+
+## Challenge 
+
+![Screenshot 2022-12-19 at 1 44 20 PM](https://user-images.githubusercontent.com/89284873/208507260-538c5415-7d60-45dc-afe3-905e70494a06.png)
+
+![Screenshot 2022-12-19 at 1 46 36 PM](https://user-images.githubusercontent.com/89284873/208507600-666e5250-9cfb-459a-870b-9253dda9c0a1.png)
+
+[Organize Components](https://scrimba.com/scrim/co87b41a4b9ca67e1d3bff420)
+
+![Screenshot 2022-12-19 at 1 50 05 PM](https://user-images.githubusercontent.com/89284873/208508158-c7240091-87d2-48a1-8c4a-80aa5b0ce2a4.png)
+
