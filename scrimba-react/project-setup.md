@@ -106,3 +106,11 @@ export default function Navbar() {
 [Access the Figma File here](https://www.figma.com/file/xA1rJVQOorqMW6xjGdBLcI/ReactFacts?node-id=0%3A1&t=M1DW61i0BVXnP0Jq-0)
 [Duplicated Figma File](https://www.figma.com/file/xdlLu27W7KO7pxLlOtn7E5/ReactFacts-(Copy)?node-id=0%3A1&t=Ed15kJzSrwu8t3Gf-0)
 
+# Quick FIgma Walkthrough
+
+- Sign up with Google
+- Choose free tier
+- Skip team name
+- Explore by yourself
+- [Intro to Figma for Developers](https://www.youtube.com/watch?v=ybc2gkvjMDs)
+
