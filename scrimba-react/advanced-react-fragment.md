@@ -86,3 +86,175 @@ function App() {
 export default App
 ```
 
+# Default Props
+
+- a fallback or a backup
+
+```app.js
+import React from "react"
+import Card from "./Card"
+
+function App() {
+    return (
+        <div>
+            <Card cardColor="red" />
+            <Card />
+            <Card cardColor="green" />
+        </div>
+    )
+}
+
+export default App
+```
+
+```card.js
+import React from "react"
+
+function Card(props) {
+    const styles = {
+        backgroundColor: props.cardColor,
+        height: 100,
+        width: 100
+    }
+    
+    return (
+        <div style={styles}></div>
+    )
+}
+
+export default Card
+```
+
+![Screenshot 2022-12-20 at 12 44 28 PM](https://user-images.githubusercontent.com/89284873/208742549-5fc0f193-cfa9-4d57-a141-4969b60990ce.png)
+
+![Screenshot 2022-12-20 at 12 44 51 PM](https://user-images.githubusercontent.com/89284873/208742620-37a887ff-3d50-4602-b388-49d9695674fd.png)
+
+- this is where default props come in
+
+*lines 15-17*
+
+```Card.js
+import React from "react"
+
+function Card(props) {
+    const styles = {
+        backgroundColor: props.cardColor,
+        height: 100,
+        width: 100
+    }
+    
+    return (
+        <div style={styles}></div>
+    )
+}
+
+Card.defaultProps = {
+    cardColor: "blue"
+}
+
+export default Card
+```
+
+## Challenge
+
+<!-- Set height and weight default -->
+
+[My Solution](https://scrimba.com/scrim/co5cf472a89c5eb21e0772063)
+
+```App.js
+import React from "react"
+import Card from "./Card"
+
+function App() {
+    return (
+        <div>
+            <Card cardColor="red" height={200} width={400} />
+            <Card />
+            <Card cardColor="green" />
+        </div>
+    )
+}
+
+export default App
+```
+
+```Card.js
+import React from "react"
+
+function Card(props) {
+    const styles = {
+        backgroundColor: props.cardColor,
+        height: props.height,
+        width: props.width
+    }
+    
+    return (
+        <div style={styles}></div>
+    )
+}
+
+Card.defaultProps = {
+    cardColor: "blue",
+    height: 100,
+    width: 100
+}
+
+export default Card
+```
+
+- what does this look like in a class component?
+
+```Card.js
+import React from "react"
+
+class Card extends React.Component {
+    render() {
+        const styles = {
+            backgroundColor: this.props.cardColor,
+            height: this.props.height,
+            width: this.props.width
+        }
+        
+        return (
+            <div style={styles}></div>
+        )
+    }
+}
+
+Card.defaultProps = {
+    cardColor: "blue",
+    height: 100,
+    width: 100
+}
+
+export default Card
+```
+
+- convert this to a static property
+
+```js
+import React from "react"
+
+class Card extends React.Component {
+    static defaultProps = {
+        cardColor: "blue",
+        height: 100,
+        width: 100
+    }
+    
+    render() {
+        const styles = {
+            backgroundColor: this.props.cardColor,
+            height: this.props.height,
+            width: this.props.width
+        }
+        
+        return (
+            <div style={styles}></div>
+        )
+    }
+}
+
+export default Card
+```
+
