@@ -258,3 +258,99 @@ class Card extends React.Component {
 export default Card
 ```
 
+# Prop Types
+
+- another way to add validation to your components is to add some prop types
+- it allows you to specify that the incoming props should be a data type
+- add some type checking for the incoming props
+- moved to a separate library called prop types
+
+![Screenshot 2022-12-20 at 12 59 56 PM](https://user-images.githubusercontent.com/89284873/208745240-502d2ada-fe64-496f-859f-a19817919d06.png)
+
+```
+$ npm install prop-types
+```
+
+1. ``` import PropTypes from "prop-types" ```
+2. specify the prop types
+
+```js
+Card.propTypes = {
+    cardColor: PropTypes.string
+}
+```
+
+- this will be helpful for you when you are developing
+- we can also specify that a prop is required for a component
+
+```js
+Card.propTypes = {
+    cardColor: PropTypes.string.isRequired
+}
+```
+
+![Screenshot 2022-12-20 at 1 04 08 PM](https://user-images.githubusercontent.com/89284873/208746151-72c2b28d-bfc8-4a20-ba04-2198bc8b04b7.png)
+
+[React Docs on PropTypes](https://reactjs.org/docs/typechecking-with-proptypes.html#proptypes)
+
+## Challenge
+
+// Challenge: Add prop types for the height and width. Make at least one of them required.
+// Extra Challenge: Make it so your incoming cardColor is only valid if it is "blue" or "red".
+
+[My Solution](https://scrimba.com/scrim/co369441c928d1a67a03b0c68)
+
+// Make sure that card color is required again
+
+[My Solution](https://scrimba.com/scrim/co77f48beaa0a310adfd48445)
+
+- it is becoming more popular to write React with TypeScript, until then, it is better to include Prop Types
+- it will make your app debugging much easier
+
+```App.js
+import React from "react"
+import Card from "./Card"
+
+function App() {
+    return (
+        <div>
+            <Card cardColor="red" height={200} width={200} />
+            <Card cardColor="purple" />
+            <Card cardColor="green" />
+        </div>
+    )
+}
+
+export default App
+```
+
+```Card.js
+import React from "react"
+import PropTypes from "prop-types"
+
+function Card(props) {
+    const styles = {
+        backgroundColor: props.cardColor,
+        height: props.height,
+        width: props.width
+    }
+    
+    return (
+        <div style={styles}></div>
+    )
+}
+
+Card.propTypes = {
+    cardColor: PropTypes.oneOf(["red", "blue", "green", "purple"]).isRequired,
+    height: PropTypes.number.isRequired,
+    width: PropTypes.number
+}
+
+Card.defaultProps = {
+    height: 100,
+    width: 100
+}
+
+export default Card
+```
+
