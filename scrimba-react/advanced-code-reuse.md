@@ -165,3 +165,61 @@ export default App
 - do not use the children property too often, passing simple data, a component with props is the best way to go
 - if you want to ensure a certain structure always, just use props
 
+## Challenge: React Children
+
+// implement a regular Callout component that can take children instead of having the three separte components having their own children in them
+
+[My Solution](https://scrimba.com/scrim/co77f405b9285b3ce8d84de47)
+
+![Screenshot 2022-12-21 at 3 47 09 PM](https://user-images.githubusercontent.com/89284873/209008302-bff0700b-baef-4bd2-b4ac-b771610d14b4.png)
+
+```Callout.js
+import React from "react"
+
+function Callout(props) {
+    return (
+        <div className="callout">
+            {props.children}
+        </div>
+    )
+}
+
+export default Callout
+```
+
+```App.js
+import React from "react"
+import Callout from "./Callout"
+
+function App() {
+    return (
+        <main>
+            <h1>Welcome!</h1>
+            
+            <Callout>
+                <h2>Don't miss out!</h2>
+                <p>Unless you don't suffer from FOMO, you better make sure you fill out the email form below!</p>
+            </Callout>
+            
+            <p>This is probably the best site you've ever come across. I'm glad you're here to witness the magnificence of this website right now.</p>
+            
+            <Callout>
+                <img src="https://picsum.photos/id/102/4320/3240" width="100%" />
+                <figcaption>Just look at those sparkling raspberries!</figcaption>
+            </Callout>
+            
+            <p>Here's some more unforgettable content. Lorem ipsum something or other.</p>
+            
+            <Callout>
+                <h2>Give us your email. We definitely won't sell it to anyone.</h2>
+                <input type="email" placeholder="Enter Email"/>
+                <button>Sign me up!</button>
+            </Callout>
+            
+        </main>
+    )
+}
+
+export default App
+```
+
