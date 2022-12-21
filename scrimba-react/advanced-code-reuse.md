@@ -26,3 +26,142 @@
 
 *When React introduced HOOKS, both Higher-order Components and Render props became outdated.*
 
+# React Children
+
+- a good way to introduce reusability:
+
+```js
+import React from "react"
+
+function App() {
+    return (
+        <div>
+            <Navbar backgroundColor="firebrick" />
+            <Button backgroundColor="blue" text="Click me!"/>
+        </div>
+    )
+}
+
+export default App
+```
+
+*providing a different prop and allow that to be customizable*
+
+- example of a call to action component that will highlight a certain part of the page with a border
+
+```js
+import React from "react"
+
+function CTA() {
+    return (
+        <div className="border">
+            <h1>This is an important CTA</h1>
+            <button>Click me now or you'll miss out!</button>
+        </div>
+    )
+}
+
+export default CTA
+```
+
+![Screenshot 2022-12-21 at 3 22 36 PM](https://user-images.githubusercontent.com/89284873/209004948-beeef9e5-3c5b-4e77-bfca-3b3180b02a0d.png)
+
+this is where children come in to play, any component that you make can be used as a self-closing element, it can also be used in a non self-closing function and anything you put in between will be automatically accessible inside of that component via a prop called props.children
+
+```App.js
+import React from "react"
+import CTA from "./CTA"
+
+function App() {
+    return (
+        <div>
+            <CTA>
+                <h1>This is an important CTA</h1>
+                <button>Click me now or you'll miss out!</button>
+            </CTA>
+        </div>
+    )
+}
+
+export default App
+```
+
+```CTA.js
+import React from "react"
+
+function CTA(props) {
+    return (
+        <div className="border">
+            {props.children}
+        </div>
+    )
+}
+
+export default CTA
+```
+
+*specify where you want the children to be put in this CTA.js component*
+*this is specially useful when you want all your i.e pop-up boxes to look the same*
+
+```css
+.border {
+    border: 1px solid blue;
+    border-radius: 5px;
+    padding: 10px;
+}
+```
+
+```js
+import React from "react"
+
+function CTA(props) {
+    return (
+        <div className="border">
+            {props.children}
+        </div>
+    )
+}
+
+export default CTA
+```
+
+```js
+import React from "react"
+import CTA from "./CTA"
+
+function App() {
+    return (
+        <div>
+            <CTA>
+                <h1>This is an important CTA</h1>
+                <button>Click me now or you'll miss out!</button>
+            </CTA>
+            
+            <CTA>
+                <form>
+                    <input type="email" placeholder="Enter email address here"/>
+                    <br />
+                    <button>Submit</button>
+                </form>
+            </CTA>
+        </div>
+    )
+}
+
+export default App
+```
+
+![Screenshot 2022-12-21 at 3 29 26 PM](https://user-images.githubusercontent.com/89284873/209005906-f8d98e74-04c7-47b0-b5f5-817cbfe3a09a.png)
+
+- You can still put in props
+
+```js
+<CTA position="right">
+    <h1>This is an important CTA</h1>
+    <button>Click me now or you'll miss out!</button>
+</CTA>
+```       
+
+- do not use the children property too often, passing simple data, a component with props is the best way to go
+- if you want to ensure a certain structure always, just use props
+
