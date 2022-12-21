@@ -223,3 +223,162 @@ function App() {
 export default App
 ```
 
+# Higher Order Components (HOCs)
+
+- stems from the concepts of higher order functions: just a function that takes another function as a parameter i.e callbacks, .map(), .filter(), .reduce()
+-  a function that takes a component as its first arguments and returns a new component that wraps the given component, providing extra capabilities to it: a function that takes a component and supercharges it
+
+![Screenshot 2022-12-21 at 3 54 19 PM](https://user-images.githubusercontent.com/89284873/209009273-a292c85f-0c47-40c2-8fc3-e703ae5e55ec.png)
+
+*this is not very DRY, so we will see how HOCs can help us fix this problem*
+
+- basic HOCs syntax: 
+
+```js
+const upgradedComponent = withSuperPowers(Component)
+export default upgradedComponent
+```
+
+```js
+const componentWithToggle = withToggle(Component)
+export default componentWithToggle
+```
+
+*you don't usually see it written in two lines, this is just for learning*
+
+- usually you'll see it like this:
+
+``` export default withToggle(Component) ```
+
+![Screenshot 2022-12-21 at 3 59 01 PM](https://user-images.githubusercontent.com/89284873/209010235-5e03aa37-3f68-475c-9d5d-a1bbd3cb9f47.png)
+
+```js
+import React from "react"
+
+// A function that takes a component as its first argument and returns a new component that wraps the given component, providing extra capabilities to it.
+
+export function withPointlessHOC(component) {
+    const Component = component
+    return function(props) {
+        return (
+            <Component {...props} />
+        )
+    }
+}
+```
+
+*in your App,js, replace the export default App with:*
+
+```
+import React from "react"
+import {withPointlessHOC} from "./withPointlessHOC"
+
+function App(props) {
+    return (
+        <div>Hello world!</div>
+    )
+}
+
+const PointlessHOC = withPointlessHOC(App)
+export default PointlessHOC
+```
+
+- HOC function has the ability to pass any component that you invoke it with and has the ability to augment the props
+
+*withExtraPropAdded.js*
+
+```js
+import React from "react"
+
+export function withExtraPropAdded(component) {
+    const Component = component
+    return function(props) {
+        return (
+            <Component anotherProp="Blah blah blah" {...props} />
+        )
+    }
+}
+```
+
+*App.js*
+
+```js
+import React from "react"
+import {withPointlessHOC} from "./withPointlessHOC"
+import {withExtraPropAdded} from "./withExtraPropAdded"
+
+function App(props) {
+    console.log(props)
+    return (
+        <div>Hello world!</div>
+    )
+}
+
+const ExtraPropComponent = withExtraPropAdded(App)
+export default ExtraPropComponent
+```
+
+![Screenshot 2022-12-21 at 4 09 34 PM](https://user-images.githubusercontent.com/89284873/209011691-a3f39b3c-b744-41be-b219-8b1ff1b44289.png)
+
+## Challenge: Higher Order Components (HOCs)
+
+/**
+ * A function that takes a component as its first argument and returns a new component that wraps
+ * the given component, providing extra capabilities to it.
+ * 
+ * Challenge: Write a higher-order component that passes a new prop to the given component
+ * called "favoriteNumber" and includes your own, personal, favorite number
+ * 
+ * Then, in App.js, render that favorite number to the screen
+ */
+ 
+ [My Solution](https://scrimba.com/scrim/cod824b38b095ea2500cec9d0)
+ 
+ ```js
+ import React from "react"
+/**
+ * A function that takes a component as its first argument and returns a new component that wraps
+ * the given component, providing extra capabilities to it.
+ * 
+ * Challenge: Write a higher-order component that passes a new prop to the given component
+ * called "favoriteNumber" and includes your own, personal, favorite number
+ * 
+ * Then, in App.js, render that favorite number to the screen
+ */
+export function withFavoriteNumber(component) {
+    const C = component
+    return function(props) {
+        return (
+            <C favoriteNumber={42} {...props}/>
+        )
+    }
+}
+```
+
+```
+import React from "react"
+import {withFavoriteNumber} from "./withFavoriteNumber"
+
+function App(props) {
+    return (
+        <div>{props.favoriteNumber}</div>
+    )
+}
+
+export default withFavoriteNumber(App)
+```
+
+![Screenshot 2022-12-21 at 4 29 53 PM](https://user-images.githubusercontent.com/89284873/209014670-23f562f0-078a-44cc-b720-5bc7abc4eb94.png)
+
+- best way to do this is
+
+*index.js*
+
+```js
+import React from "react"
+import ReactDOM from "react-dom"
+import App from "./App"
+
+ReactDOM.render(<App favoriteNumber={42} />, document.getElementById("root"))
+```
+
