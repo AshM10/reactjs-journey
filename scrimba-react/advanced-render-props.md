@@ -510,3 +510,384 @@ render(
 
 - This will pass the entire myArray object as a prop to the MyComponent component.
 
+*If you have to chooses between HOCs and render props, choose render props*
+
+### Refactoring HOC to render props
+
+- In React, a Higher Order Component (HOC) is a function that takes a component and returns a new component. HOCs are a way to reuse code, render high-level abstractions, and manipulate the behavior of a component.
+- One way to refactor an HOC to use the "render props" pattern is to pass a function as a prop to the HOC, and then have the HOC call that function with the desired data or behavior as an argument.
+- Here's an example of an HOC that adds a loading indicator to a component:
+
+```js
+const withLoadingIndicator = WrappedComponent => {
+  return class extends React.Component {
+    render() {
+      return this.props.isLoading ? (
+        <div>Loading...</div>
+      ) : (
+        <WrappedComponent {...this.props} />
+      );
+    }
+  };
+};
+```
+
+- To refactor this HOC to use the render props pattern, we can pass a function as a prop to the HOC, and then have the HOC call that function with the desired data or behavior as an argument.
+- Here's the refactored HOC:
+
+```js
+const withLoadingIndicator = render => {
+  return class extends React.Component {
+    render() {
+      return this.props.isLoading ? (
+        render({ isLoading: true })
+      ) : (
+        render({ isLoading: false })
+      );
+    }
+  };
+};
+```
+
+- To use this HOC, you would pass a function as the render prop to the HOC, and then use the data or behavior provided by the HOC in the function body:
+
+```js
+const MyComponent = () => (
+  <div>
+    <withLoadingIndicator
+      render={({ isLoading }) => (isLoading ? <div>Loading...</div> : <div>Loaded</div>)}
+    />
+  </div>
+);
+```
+
+- This pattern is called "render props" because the prop passed to the HOC is a function that is used to render the component. It is a way to share behavior between components without using inheritance or HOCs.
+
+## Refactoring our HOC sample to render props
+
+- Delete the HOC folder
+
+![Screenshot 2022-12-23 at 1 55 31 PM](https://user-images.githubusercontent.com/89284873/209400454-8bbe687e-a533-4fe2-bc57-db975eaadda4.png)
+
+*Toggler.js*
+
+```js
+import React, {Component} from "react"
+
+class Toggler extends Component {
+    state = {
+        on: this.props.defaultOnValue
+    }
+    
+    toggle = () => {
+        this.setState(prevState => {
+            return {
+                on: !prevState.on
+            }
+        })
+    }
+    
+    render() {
+        return (
+            <div>
+                {this.props.render(this.state.on, this.toggle)}
+            </div>
+        )
+    }
+}
+
+export default Toggler
+```
+
+*Favorite.js*
+
+```js
+import React, {Component} from "react"
+import Toggler from "./Toggler"
+
+function Favorite(props) {
+    return (
+        <Toggler render={function(on, toggle) {
+            return (
+                <div>
+                    <h3>Click heart to favorite</h3>
+                    <h1>
+                        <span 
+                            onClick={toggle}
+                        >
+                            {on ? "❤️" : "♡"}
+                        </span>
+                    </h1>
+                </div>
+            )
+        }}/>
+    ) 
+}
+
+export default Favorite
+```
+
+- we oftentimes use the arrow function with the implicit return like this:
+
+*Favorite.js*
+
+```js
+import React, {Component} from "react"
+import Toggler from "./Toggler"
+
+function Favorite(props) {
+    return (
+        <Toggler render={
+            (on, toggle) => (
+                <div>
+                    <h3>Click heart to favorite</h3>
+                    <h1>
+                        <span 
+                            onClick={toggle}
+                        >
+                            {on ? "❤️" : "♡"}
+                        </span>
+                    </h1>
+                </div>
+            )
+        }/>
+    ) 
+}
+
+export default Favorite
+```
+
+## Challenge
+
+// bring in the Toggler component
+// render the Toggler inside the Menu, and use the render prop to determine what will get displayed
+// remember to bring in the "goodies" (state and methods) to that function so you can make this work
+
+[My Solution](https://scrimba.com/scrim/cocf64ad1acbf0e872eea4bc1)
+
+```js
+import React from "react"
+import Toggler from "./Toggler"
+// render the Toggler inside the Menu, and use the render prop to determine what will get displayed
+// remember to bring in the "goodies" (state and methods) to that function so you can make this work
+
+function Menu(props) {
+    return (
+        <Toggler render={(on, toggle) => (
+            <div>
+                <button onClick={toggle}>{on ? "Hide" : "Show"} Menu </button>
+                <nav style={{display: on ? "block" : "none"}}>
+                    <h6>Signed in as Coder123</h6>
+                    <p><a>Your Profile</a></p>
+                    <p><a>Your Repositories</a></p>
+                    <p><a>Your Stars</a></p>
+                    <p><a>Your Gists</a></p>
+                </nav>
+            </div>
+        )}/>
+    ) 
+}
+
+export default Menu
+```
+
+## Set the default value
+
+*Toggler.js*
+
+```js
+import React, {Component} from "react"
+
+class Toggler extends Component {
+    state = {
+        on: this.props.defaultOnValue
+    }
+    
+    toggle = () => {
+        this.setState(prevState => {
+            return {
+                on: !prevState.on
+            }
+        })
+    }
+    
+    render() {
+        console.log(this.state.on)
+        return (
+            <div>
+                {this.props.render(this.state.on, this.toggle)}
+            </div>
+        )
+    }
+}
+
+Toggler.defaultProps = {
+    defaultOnValue: false
+}
+
+export default Toggler
+```
+
+- you can also write the default on static
+
+```js
+import React, {Component} from "react"
+
+class Toggler extends Component {
+    state = {
+        on: this.props.defaultOnValue
+    }
+    
+    static defaultProps = {
+        defaultOnValue: false
+    }
+    
+    toggle = () => {
+        this.setState(prevState => {
+            return {
+                on: !prevState.on
+            }
+        })
+    }
+    
+    render() {
+        console.log(this.state.on)
+        return (
+            <div>
+                {this.props.render(this.state.on, this.toggle)}
+            </div>
+        )
+    }
+}
+
+export default Toggler
+```
+
+*Menu.js*
+
+```js
+import React from "react"
+import Toggler from "./Toggler"
+// render the Toggler inside the Menu, and use the render prop to determine what will get displayed
+// remember to bring in the "goodies" (state and methods) to that function so you can make this work
+
+function Menu(props) {
+    return (
+        <Toggler defaultOnValue={true} render={(on, toggle) => (
+            <div>
+                <button onClick={toggle}>{on ? "Hide" : "Show"} Menu </button>
+                <nav style={{display: on ? "block" : "none"}}>
+                    <h6>Signed in as Coder123</h6>
+                    <p><a>Your Profile</a></p>
+                    <p><a>Your Repositories</a></p>
+                    <p><a>Your Stars</a></p>
+                    <p><a>Your Gists</a></p>
+                </nav>
+            </div>
+        )}/>
+    ) 
+}
+
+export default Menu
+```
+
+*Favorite.js*
+
+```js
+import React, {Component} from "react"
+import Toggler from "./Toggler"
+
+function Favorite(props) {
+    return (
+        <Toggler render={
+            (on, toggle) => (
+                <div>
+                    <h3>Click heart to favorite</h3>
+                    <h1>
+                        <span 
+                            onClick={toggle}
+                        >
+                            {on ? "❤️" : "♡"}
+                        </span>
+                    </h1>
+                </div>
+            )
+        }/>
+    ) 
+}
+
+export default Favorite
+```
+
+## Passing a single parameter instead of two
+
+```js
+render() {
+        return (
+            <div>
+                {this.props.render({
+                    on: this.state.on, 
+                    toggle: this.toggle
+                })}
+            </div>
+        )
+    }
+```
+
+``` Toggler defaultOnValue={true} render={({on, toggle}) ```
+
+``` ({on, toggle}) ```
+
+## Wrapping the Menu inside the Toggler
+
+*App.js*
+
+```js
+import React from "react"
+import Menu from "./Menu"
+import Favorite from "./Favorite"
+import Toggler from "./Toggler"
+
+function App() {
+    return (
+        <div>
+            <Toggler defaultOnValue={true} render={({on, toggle}) => {
+                return (
+                    <Menu on={on} toggle={toggle}/>
+                )
+            }}/>
+            <hr />
+            <Favorite />
+        </div>
+    )
+}
+
+export default App
+```
+
+*Menu.js*
+
+```js
+import React from "react"
+import Toggler from "./Toggler"
+// render the Toggler inside the Menu, and use the render prop to determine what will get displayed
+// remember to bring in the "goodies" (state and methods) to that function so you can make this work
+
+function Menu(props) {
+    return (
+        <div>
+            <button onClick={props.toggle}>{props.on ? "Hide" : "Show"} Menu </button>
+            <nav style={{display: props.on ? "block" : "none"}}>
+                <h6>Signed in as Coder123</h6>
+                <p><a>Your Profile</a></p>
+                <p><a>Your Repositories</a></p>
+                <p><a>Your Stars</a></p>
+                <p><a>Your Gists</a></p>
+            </nav>
+        </div>
+    ) 
+}
+
+export default Menu
+```
+
