@@ -113,3 +113,400 @@ greet('John', sayGoodbye);
 
 - In this example, the sayGoodbye function accepts a name parameter and logs a goodbye message using the name parameter. When the code is run, it will log "Hello, John!" to the console and then "Goodbye, John!" to the console.
 
+# Render Props Part 2
+
+- To render props in a React component, you can access the props object in the component's render method or in the component's function body if it's a functional component.
+- Here's an example of rendering props in a class-based React component:
+
+```js
+import React from 'react';
+
+// This is a class-based component that displays a message
+// The message is passed in as a prop called "message"
+class WelcomeMessage extends React.Component {
+  render() {
+    return <h1>{this.props.message}</h1>;
+  }
+}
+
+// This is the parent component that renders the WelcomeMessage component
+// It passes a message prop to the WelcomeMessage component
+class App extends React.Component {
+  render() {
+    return <WelcomeMessage message="Hello World!" />;
+  }
+}
+```
+
+- In the example above, the WelcomeMessage component is a class-based component that has a render method that returns JSX that includes the message prop. The App component is the parent component that renders the WelcomeMessage component and passes a message prop to it.
+- Here's an example of rendering props in a functional component:
+
+```js
+import React from 'react';
+
+// This is a functional component that displays a message
+// The message is passed in as a prop called "message"
+function WelcomeMessage(props) {
+  return <h1>{props.message}</h1>;
+}
+
+// This is the parent component that renders the WelcomeMessage component
+// It passes a message prop to the WelcomeMessage component
+function App() {
+  return <WelcomeMessage message="Hello World!" />;
+}
+```
+
+- In the example above, the WelcomeMessage component is a functional component that takes in a props object as an argument and returns JSX that includes the message prop. The App component is the parent component that renders the WelcomeMessage component and passes a message prop to it.
+- You can also use the destructuring syntax to make it easier to access props in a functional component:
+
+```js
+import React from 'react';
+
+// This is a functional component that displays a message
+// The message is passed in as a prop called "message"
+function WelcomeMessage({ message }) {
+  return <h1>{message}</h1>;
+}
+
+// This is the parent component that renders the WelcomeMessage component
+// It passes a message prop to the WelcomeMessage component
+function App() {
+  return <WelcomeMessage message="Hello World!" />;
+}
+```
+
+- In the example above, the WelcomeMessage component is a functional component that takes in a message prop as an argument and returns JSX that includes the message prop. The App component is the parent component that renders the WelcomeMessage component and passes a message prop to it.
+
+- By now, you should be familiar with passing props into your own custom component:
+
+*App.js*
+
+```js
+import React from "react"
+import Example from "./Example"
+
+function App() {
+    return (
+        <div>
+            <Example name={"Bob"} />
+        </div>
+    )
+}
+
+export default App
+```
+
+*Example.js*
+
+```js
+import React from "react"
+
+function Example(props) {
+    return <h1>Hi {props.name}</h1>
+}
+
+export default Example
+```
+
+![Screenshot 2022-12-23 at 1 07 21 PM](https://user-images.githubusercontent.com/89284873/209395523-ba2c6e22-11af-483f-a893-dbb461bd8aea.png)
+
+## Data types you can pass as props
+
+- In React, you can pass any data type as a prop to a component. This includes:
+
+1. Primitive data types: strings, numbers, booleans, and null
+2. Complex data types: arrays, objects, and functions
+3. JSX elements
+
+- Here are some examples of passing different data types as props in a React component:
+
+```js
+import React from 'react';
+
+// This is a functional component that displays a message
+// The message is passed in as a prop called "message"
+function WelcomeMessage(props) {
+  return <h1>{props.message}</h1>;
+}
+
+// This is the parent component that renders the WelcomeMessage component
+// It passes different types of props to the WelcomeMessage component
+function App() {
+  return (
+    <div>
+      <WelcomeMessage message="Hello World!" />
+      <WelcomeMessage message={123} />
+      <WelcomeMessage message={true} />
+      <WelcomeMessage message={null} />
+      <WelcomeMessage message={['a', 'b', 'c']} />
+      <WelcomeMessage message={{ key: 'value' }} />
+      <WelcomeMessage message={() => console.log('Hello!')} />
+    </div>
+  );
+}
+```
+
+- In the example above, the App component passes different types of props to the WelcomeMessage component. These include a string, a number, a boolean, null, an array, an object, and a function.
+- It's important to note that when passing an object or array as a prop, you should make sure to create a new instance of the object or array rather than modifying the original object or array. This is because React uses shallow comparison to determine if a prop has changed, and modifying the original object or array will not trigger a re-render of the component.
+- For example, the following code will not trigger a re-render of the WelcomeMessage component because the original array is modified:
+
+```js
+import React from 'react';
+
+// This is a functional component that displays a message
+// The message is passed in as a prop called "message"
+function WelcomeMessage(props) {
+  return <h1>{props.message}</h1>;
+}
+
+// This is the parent component that renders the WelcomeMessage component
+// It passes an array as a prop to the WelcomeMessage component
+// and then modifies the original array
+function App() {
+  const array = ['a', 'b', 'c'];
+  return (
+    <div>
+      <WelcomeMessage message={array} />
+      <button onClick={() => array.push('d')}>Add element</button>
+    </div>
+  );
+}
+```
+
+- To trigger a re-render of the WelcomeMessage component when the array is modified, you should create a new instance of the array:
+
+```js
+import React from 'react';
+
+// This is a functional component that displays a message
+// The message is passed in as a prop called "message"
+function WelcomeMessage({ message }) {
+  return <h1>{message}</h1>;
+}
+
+// This is the parent component that renders the WelcomeMessage component
+// It passes an array as a prop to the WelcomeMessage component
+// When the array is modified, it creates a new instance of the array
+// and passes it as a prop to trigger a re-render of the WelcomeMessage component
+class App extends React.Component {
+  state = {
+    data: ['a', 'b', 'c']
+  };
+
+  modifyArray = () => {
+    this.setState({
+      data: [...this.state.data, 'd']
+    });
+  };
+
+  render() {
+    return (
+      <>
+        <WelcomeMessage message={this.state.data} />
+        <button onClick={this.modifyArray}>Modify array</button>
+      </>
+    );
+  }
+```
+
+### Passing a function
+
+*App.js*
+
+```js
+import React from "react"
+import Example from "./Example"
+
+function App() {
+    return (
+        <div>
+            <Example render={
+                function(isDaytime) {
+                    return (
+                        <h1>{isDaytime ? "Good day" : "Good evening"}, Bob!</h1>
+                    )
+                }
+            }/>
+        </div>
+    )
+}
+
+export default App
+```
+
+*Example.js*
+
+```js
+import React from "react"
+
+function Example(props) {
+    return (
+        <div>
+            {props.render(true)}
+        </div>
+    )
+}
+
+export default Example
+```
+
+## Challenge
+
+- make the function receives a number and renders something based on that number
+
+[My Solution](https://scrimba.com/scrim/co6004b608d82d7bc4bfb3c29)
+
+```js
+import React from "react"
+
+function Example(props) {
+    return (
+        <div>
+            {props.render(-42)}
+        </div>
+    )
+}
+
+export default Example
+```
+
+```
+import React from "react"
+import Example from "./Example"
+
+function App() {
+    return (
+        <div>
+            <Example render={
+                function(number) {
+                    return (
+                        <h1>{number >=0 ? "Positive" : "Negative"}</h1>
+                    )
+                }
+            }/>
+        </div>
+    )
+}
+
+export default App
+```
+
+![Screenshot 2022-12-23 at 1 26 39 PM](https://user-images.githubusercontent.com/89284873/209397211-2de3ed79-802c-4137-9e9b-58a1df416acb.png)
+
+### What is render() in react?
+
+- In React, the render() method is a lifecycle method that is called automatically by the React framework. It is used to render the content of a React component to the DOM (Document Object Model).
+- The render() method is responsible for producing a tree of React elements that represent the component's visual output. It is called each time the component's state or props (short for "properties") change, and the output is updated to reflect the new state or props.
+- Here is an example of a simple render() method in a React component:
+
+```js
+render() {
+  return (
+    <div>
+      <h1>Hello, World!</h1>
+      <p>This is a simple React component.</p>
+    </div>
+  );
+}
+```
+
+- This render() method returns a single React element, which is a div element that contains an h1 element and a p element. When this component is rendered, it will produce the following HTML:
+
+```html
+<div>
+  <h1>Hello, World!</h1>
+  <p>This is a simple React component.</p>
+</div>
+```
+
+- The render() method is the most important method in a React component, as it determines what the component will actually render to the screen. It is called automatically by the React framework, and you should not call it directly. Instead, you should focus on writing the logic that goes inside the render() method to define the component's output.
+
+## Challenge
+
+- pass and render an array or object
+
+*Example.js*
+
+```js
+import React from "react"
+
+function Example(props) {
+    return (
+        <div>
+            {props.render(true, 42)}
+        </div>
+    )
+}
+
+export default Example
+```
+
+*App.js*
+
+```js
+import React from "react"
+import Example from "./Example"
+
+function App() {
+    return (
+        <div>
+            <Example render={
+                function(bool, number) {
+                    return (
+                        <div>
+                            <h1>{number}</h1>
+                            <h1>{bool ? "true" : "false"}</h1>
+                        </div>
+                    )
+                }
+            }/>
+        </div>
+    )
+}
+
+export default App
+```
+
+![Screenshot 2022-12-23 at 1 34 44 PM](https://user-images.githubusercontent.com/89284873/209398691-7c7b6884-25d6-4b9d-ac98-09a673fff89f.png)
+
+### Passing an array as a prop
+
+- To pass an array as a prop in a React component, you can include it as an attribute in the JSX element that represents the component. -  - Here's an example of how you might do this:
+
+```js
+import React from 'react';
+
+// define an array of data that you want to pass as a prop
+const myArray = [1, 2, 3, 4, 5];
+
+// define a component that takes an array as a prop
+function MyComponent(props) {
+  return (
+    <div>
+      {props.myArray.map(item => (
+        <div key={item}>{item}</div>
+      ))}
+    </div>
+  );
+}
+
+// render the component and pass the array as a prop
+render(
+  <MyComponent myArray={myArray} />,
+  document.getElementById('root')
+);
+```
+
+- In this example, the MyComponent component is defined to take an array as a prop called myArray. The component then uses the map function to render a list of items from the array. When the component is rendered, the myArray prop is passed to it, and the component can use the data from the array to render its content.
+- It's also possible to pass an array as a prop using the spread operator. For example:
+
+```js
+render(
+  <MyComponent {...{myArray}} />,
+  document.getElementById('root')
+);
+```
+
+- This will pass the entire myArray object as a prop to the MyComponent component.
+
