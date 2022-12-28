@@ -142,6 +142,60 @@ function App() {
 export default App
 ```
 
+## Simplifying the solution
+
+*DataFetcher.js*
+
+```js
+import React, {Component} from "react"
+
+class DataFetcher extends Component {
+    state = {
+        loading: false,
+        data: null
+    }
+    
+    componentDidMount() {
+        this.setState({loading: true})
+        fetch(this.props.url)
+            .then(res => res.json())
+            .then(data => this.setState({data, loading: false}))
+    }
+    
+    render() {
+        const {data, loading} = this.state
+        return (
+            this.props.children({data, loading})
+        )
+    }
+}
+
+export default DataFetcher
+```
+
+*App.js*
+
+```js
+import React from "react"
+import DataFetcher from "./DataFetcher"
+
+function App() {    
+    return (
+        <div>
+            <DataFetcher url="https://swapi.co/api/people/1">
+                {({data, loading}) => (
+                    loading ? 
+                    <h1>Loading...</h1> :
+                    <p>{JSON.stringify(data)}</p>
+                )}
+            </DataFetcher>
+        </div>
+    )
+}
+
+export default App
+```
+
 ## Data Fetching in React
 
 - In React, data fetching refers to the process of retrieving data from a remote server or API (Application Programming Interface) and storing it in a local component state. This data can then be displayed in the React component using JSX (JavaScript XML).
@@ -219,4 +273,67 @@ function ExampleComponent() {
 - In addition to making it possible to build dynamic, data-driven applications, data fetching is also important because it enables you to decouple the data layer of your application from the presentation layer. This means that you can change the data source or the way that data is retrieved and displayed without having to make changes to the actual components that display the data. This can make it easier to maintain and update your application over time.
 
 - Overall, data fetching is an important aspect of building applications with React because it enables you to build dynamic, data-driven applications that can display different content based on the data that is retrieved, and it allows you to decouple the data layer of your application from the presentation layer.
+
+## How to handle an error in this component
+
+### [My Solution](https://scrimba.com/scrim/cod2a420a9e6a91072edbacc2)
+
+- To handle errors in the ` App ` component that are thrown by the ` DataFetcher ` component, you can add an additional prop to the DataFetcher component called ` error ` , which will be passed to the children render prop along with ` data ` and ` loading ` .
+
+- In the DataFetcher component, you can update the state to include an error field and set it in the catch block of the fetch promise chain.
+
+```js
+class DataFetcher extends Component {
+  state = {
+    loading: false,
+    data: null,
+    error: null
+  }
+
+  componentDidMount() {
+    this.setState({loading: true})
+    fetch(this.props.url)
+      .then(res => res.json())
+      .then(data => this.setState({data, loading: false}))
+      .catch(error => this.setState({error, loading: false}))
+  }
+
+  render() {
+    const {data, loading, error} = this.state
+    return (
+      this.props.children({data, loading, error})
+    )
+  }
+}
+```
+
+- Then, in the App component, you can check for the presence of the error prop in the children render prop function and display an error message or take some other action.
+
+```js
+function App() {
+  return (
+    <div>
+      <DataFetcher url="https://swapi.co/api/peole/1">
+        {({data, loading, error}) => (
+          loading ? 
+            <h1>Loading...</h1> :
+          error ?
+            <p>There was an error: {error.message}</p> :
+            <p>{JSON.stringify(data)}</p>
+        )}
+      </DataFetcher>
+    </div>
+  )
+}
+```
+
+- You can also add a finally block to the end of the promise chain in the DataFetcher component to reset the loading state, whether the fetch was successful or not. This can help prevent the component from getting stuck in a loading state if there is an error.
+
+```js
+fetch(this.props.url)
+  .then(res => res.json())
+  .then(data => this.setState({data, loading: false}))
+  .catch(error => this.setState({error, loading: false}))
+  .finally(() => this.setState({loading: false}))
+```
 
