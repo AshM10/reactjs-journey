@@ -4,7 +4,7 @@
 
 1. React recursively renders components down one branch until there are no more to render
 
-- - We have the ` App ` component that's rendering a ` p ` and two ` GrandParent ` components
+  - We have the ` App ` component that's rendering a ` p ` and two ` GrandParent ` components
 
 ```js
 import React, {Component} from "react"
@@ -26,7 +26,7 @@ class Parent extends Component {
 export default Parent
 ```
 
-- - ` GrandParent ` is rendering a ` p ` and two ` parent ` components
+  - ` GrandParent ` is rendering a ` p ` and two ` parent ` components
 
 ```js
 import React, {Component} from "react"
@@ -48,7 +48,7 @@ class GrandParent extends Component {
 export default GrandParent
 ```
 
-- - the ` parent ` is rendering a ` p ` and two ` child ` components
+  - the ` parent ` is rendering a ` p ` and two ` child ` components
 
 ```js
 import React, {Component} from "react"
@@ -70,7 +70,7 @@ class Parent extends Component {
 export default Parent
 ```
 
-- - and the ` child ` is rendering a ` p ` and two ` GrandChild ` components
+  - and the ` child ` is rendering a ` p ` and two ` GrandChild ` components
 
 ```js
 import React, {Component} from "react"
