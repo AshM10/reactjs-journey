@@ -6,7 +6,8 @@
 
 ![Screenshot 2022-12-28 at 11 51 57 AM](https://user-images.githubusercontent.com/89284873/209852671-080d3756-d197-4e20-8252-762268927033.png)
 
-# [My Solution](https://scrimba.com/scrim/co0e14efbbe209154a901b143)
+## [My Solution](https://scrimba.com/scrim/co0e14efbbe209154a901b143)
+## [My other solution](https://scrimba.com/scrim/co9a54077af4bf7bebeef63c5)
 
 - In this case, the DataFetcher component is using the render props pattern to pass the loading and data states to the component 
 that makes use of it.
@@ -79,4 +80,6 @@ function App() {
 
 export default App
 ```
+
+https://user-images.githubusercontent.com/89284873/209854857-0b38540b-4596-468a-9896-9e53029ad916.mov
 
