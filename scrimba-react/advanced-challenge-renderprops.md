@@ -83,3 +83,140 @@ export default App
 
 https://user-images.githubusercontent.com/89284873/209854857-0b38540b-4596-468a-9896-9e53029ad916.mov
 
+## Instructor's solution
+
+- remember, in the render props pattern, what we do is acll a function that's being pass to this component i.e. *DataFetcher.js* 
+- component doesn't really care about how the component is being used. Instead, it's up to whatever component is using this component i.e. *App.js* .
+- what this component cares about is this the maintenance of state and updating it correctly, making the request in this case and returning that data.
+
+*DataFetcher.js*
+
+```js
+import React, {Component} from "react"
+
+class DataFetcher extends Component {
+    state = {
+        loading: false,
+        data: null
+    }
+    
+    componentDidMount() {
+        this.setState({loading: true})
+        fetch(this.props.url)
+            .then(res => res.json())
+            .then(data => this.setState({data: data, loading: false}))
+    }
+    
+    render() {
+        return (
+            this.props.children(this.state.data, this.state.loading)
+        )
+    }
+}
+
+export default DataFetcher
+```
+
+*App.js*
+
+```js
+import React from "react"
+import DataFetcher from "./DataFetcher"
+
+function App() {    
+    return (
+        <div>
+            <DataFetcher url="https://swapi.co/api/people/1">
+                {(data, loading) => {
+                    return (
+                        loading ? 
+                        <h1>Loading...</h1> :
+                        <p>{JSON.stringify(data)}</p>
+                    )
+                }}
+            </DataFetcher>
+        </div>
+    )
+}
+
+export default App
+```
+
+## Data Fetching in React
+
+- In React, data fetching refers to the process of retrieving data from a remote server or API (Application Programming Interface) and storing it in a local component state. This data can then be displayed in the React component using JSX (JavaScript XML).
+
+- There are several ways to fetch data in a React application. One common method is to use the fetch API, which is a built-in browser API for making HTTP requests. Here's an example of how you might use fetch to retrieve data from a remote API and store it in a React component:
+
+```js
+import React, { useState, useEffect } from 'react';
+
+function ExampleComponent() {
+  const [data, setData] = useState(null);
+
+  useEffect(() => {
+    async function fetchData() {
+      const response = await fetch('https://example-api.com/endpoint');
+      const data = await response.json();
+      setData(data);
+    }
+    fetchData();
+  }, []);
+
+  return (
+    <div>
+      {data ? (
+        <div>{data.name}</div>
+      ) : (
+        <div>Loading...</div>
+      )}
+    </div>
+  );
+}
+```
+
+- In this example, the useEffect hook is used to perform the data fetching when the component mounts. The fetch function is used to make the HTTP request, and the response.json method is used to parse the response data as JSON. The data is then stored in the component's state using the setData function, which is provided by the useState hook.
+
+- Another popular way to fetch data in a React application is to use a library like Axios, which provides a simple API for making HTTP requests.
+
+```js
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+
+function ExampleComponent() {
+  const [data, setData] = useState(null);
+
+  useEffect(() => {
+    async function fetchData() {
+      const response = await axios.get('https://example-api.com/endpoint');
+      setData(response.data);
+    }
+    fetchData();
+  }, []);
+
+  return (
+    <div>
+      {data ? (
+        <div>{data.name}</div>
+      ) : (
+        <div>Loading...</div>
+      )}
+    </div>
+  );
+}
+```
+
+- In this example, the axios.get function is used to make the HTTP request, and the response.data property is used to access the data returned by the API. The data is then stored in the component's state using the setData function.
+
+- Overall, data fetching is an important aspect of building applications with React, as it allows you to retrieve and display data from remote sources in your components.
+
+## Why is Data Fetching important?
+
+- Data fetching is important in React because it allows you to retrieve and display data from remote sources in your application. This is useful because it enables you to build dynamic, data-driven applications that can display different content based on the data that is retrieved.
+
+- For example, you might use data fetching to retrieve a list of products from a remote API and display them in a product catalog. You could then use filters or search functionality to allow users to find specific products, or you could display the products in a grid or list view. All of this would be made possible by fetching data from a remote source and storing it in the component state.
+
+- In addition to making it possible to build dynamic, data-driven applications, data fetching is also important because it enables you to decouple the data layer of your application from the presentation layer. This means that you can change the data source or the way that data is retrieved and displayed without having to make changes to the actual components that display the data. This can make it easier to maintain and update your application over time.
+
+- Overall, data fetching is an important aspect of building applications with React because it enables you to build dynamic, data-driven applications that can display different content based on the data that is retrieved, and it allows you to decouple the data layer of your application from the presentation layer.
+
