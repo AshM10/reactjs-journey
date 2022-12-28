@@ -107,7 +107,17 @@ export default Child
 
 ![Screenshot 2022-12-28 at 12 58 51 PM](https://user-images.githubusercontent.com/89284873/209859746-d4f1c1bc-dc2b-44c8-8172-f5f9285d2dd9.png)
 
+- this is one of the key features of React, as it allows the framework to efficiently update the UI in response to changes in the component state.
+
+- However, if a component is re-rendered unnecessarily, it can have a negative impact on the performance of an application. If a component is re-rendered unnecessarily, it can cause the browser to do more work than is necessary to update the UI, which can lead to slower rendering times and a less responsive user experience.
+
 3. ` shouldComponentUpdate() ` method, ` React.PureComponent ` , and ` React.memo() ` are tools to help fix this problem. ⬆️
+
+- There are a few ways to optimize the rendering performance of a React application. One approach is to use React's shouldComponentUpdate lifecycle method, which allows a component to return a boolean value indicating whether it should re-render or not. By carefully controlling when a component re-renders, it's possible to improve the overall performance of an application.
+
+- Another approach is to use React's memo higher-order component, which is similar to shouldComponentUpdate, but is applied as a function that wraps a component rather than a method on the component itself. memo will only re-render a component if its props have changed, which can help to optimize the performance of an application by minimizing unnecessary re-renders.
+
+- Finally, it's also important to consider the overall design of an application and to make sure that the component tree is structured in a way that minimizes the number of unnecessary re-renders. This might involve using techniques like lifting state up and using a unidirectional data flow to ensure that changes to state only affect the components that need to be updated.
 
 ## Summary
 
