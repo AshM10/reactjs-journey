@@ -32,4 +32,7 @@ I have also built a few small projects to practice my skills, including a [weath
 
 In the future, I plan to continue learning and improving my React skills by building more projects and possibly taking more advanced courses. I'm also interested in learning about other related technologies, such as Redux and GraphQL.
 
+## Author 👸🏼
+- Connect with ASTHER MORENO on [LinkedIn](https://www.linkedin.com/in/asthermoreno10/) and [Twitter](https://twitter.com/sexy_gravy)
+
 Thank you for checking out my React journey notes! I hope they are helpful to you as you learn React or pursue other web development goals.
