@@ -112,4 +112,47 @@ main {
 }
 ```
 
+## Challenge
+
+- Color the bullets
+
+![Screenshot 2023-01-06 at 11 43 03 AM](https://user-images.githubusercontent.com/89284873/211068444-e0cf9449-a5dc-4eab-aca1-8d6052b0f6ae.png)
+
+[The Marker pseudo element](https://developer.mozilla.org/en-US/docs/Web/CSS/::marker) - not accepted by all browsers
+
+```css
+.main--facts > li::marker {
+    font-size: 1.4rem;
+    color: #61DAFB;
+}
+```
+
+- Add background Logo
+
+Challenge: Place the gray react logo in the background
+
+Don't use an `img` element, but rather set it as the
+`background-image` of the `main` element.
+
+Hint: you'll need to use the following properties:
+- background-image
+- background-repeat
+- background-position
+
+(Or the shorthand `background` property with values for all
+those other properties)
+
+[My Solution](https://scrimba.com/scrim/co0e74109808c76267c07368a) - I had a hard time changing the color of the background image.
+
+```css
+main {
+    padding: 57px 27px;
+    color: white;
+    background-image: url(./images/react-icon-large.png);
+    background-repeat: no-repeat;
+    background-position: right 75%;
+}
+```
+
+![Screenshot 2023-01-06 at 12 01 18 PM](https://user-images.githubusercontent.com/89284873/211071376-66191b4a-c79e-4bf4-a8a5-72ab7191f368.png)
 
