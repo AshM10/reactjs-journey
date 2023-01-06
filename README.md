@@ -18,6 +18,7 @@ I'm using a combination of online resources to learn React, including:
 1. [Scrimba](https://scrimba.com/dashboard#overview) - A platform for interactive coding screencasts that allows you to follow along with the instructor and write code in your own browser.
 2. [React documentation](https://beta.reactjs.org) - The official React documentation is a great resource for learning the basics and diving deeper into specific topics.
 3. [React tutorials on YouTube](https://www.youtube.com/results?search_query=react+tutorials) - There are many great React tutorials available on YouTube that provide a visual explanation of different concepts.
+4. [SheCodes](https://www.shecodes.io/ashtoyo) - Advanced React Development. Click link to get 20% off the workshop.
 
 ## My progress so far 🪜
 
