@@ -28,6 +28,12 @@ So far, I have completed the following courses and tutorials:
 
 I have also built a few small projects to practice my skills, including a [weather app](https://github.com/AshM10/react-weather-app) , a [dictionary app](https://github.com/AshM10/react-dictionary-project) and [100 ways to digital detox app](https://github.com/AshM10/digital-detox) . I also worked with other developers, and used React to build a [to-do list app](https://github.com/explorerdevs/fm-todoist) and a [memory game app](https://github.com/explorerdevs/memory-game) . I joined a hackathon where we made the [Happy Garden app](https://github.com/elsalvadordali/green-smile) that won third place. 
 
+## Certificate
+
+<img width="937" alt="Screenshot 2023-01-06 at 10 45 06 AM" src="https://user-images.githubusercontent.com/89284873/211057859-bd91fbe9-63f2-4d7e-920d-96019370b922.png">
+
+Advanced React Development via [SheCodes](https://www.shecodes.io/certificates/3570072e9356c766630382a6fb401641)
+
 ## Future plans 🔭
 
 In the future, I plan to continue learning and improving my React skills by building more projects and possibly taking more advanced courses. I'm also interested in learning about other related technologies, such as Redux and GraphQL.
