@@ -6,3 +6,8 @@ Choose the design you like best from [Figma](https://www.figma.com/file/4ctPLUvI
 
 ![Screenshot 2023-01-10 at 3 06 11 PM](https://user-images.githubusercontent.com/89284873/211662483-a06cb592-6d9a-4575-9e9f-95e0ba83e97b.png)
 
+## Project
+
+*in progress*
+
+Link to project repo: [Digital Card](https://github.com/AshM10/digital-card)
