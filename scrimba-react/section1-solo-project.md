@@ -8,6 +8,23 @@ Choose the design you like best from [Figma](https://www.figma.com/file/4ctPLUvI
 
 ## Project
 
-*in progress*
+Link to project repo: [AshM10's GitHub](https://github.com/AshM10/digital-card)
+Hosted on: [Netlify](https://ashmoreno-digital-card.netlify.app)
 
-Link to project repo: [Digital Card](https://github.com/AshM10/digital-card)
+## Asking for code review
+
+Hello everyone!
+
+I've just completed my first solo Scrimba project using React, a digital business card for Ash Moreno. It's a simple card that displays information about Ash Moreno, including their background and interests, as well as links to their social media profiles.
+
+I would greatly appreciate it if some of you could take a look at my code and give me some feedback. I'm particularly interested in hearing about:
+
+- readability of the code
+- best practices used
+- efficiency
+- areas for improvement
+- any error that you might find
+
+Thank you in advance for your time and feedback!
+
+
