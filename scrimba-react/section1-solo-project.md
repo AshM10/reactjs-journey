@@ -27,4 +27,12 @@ I would greatly appreciate it if some of you could take a look at my code and gi
 
 Thank you in advance for your time and feedback!
 
+## Recap
+
+![Screenshot 2023-01-13 at 1 17 04 PM](https://user-images.githubusercontent.com/89284873/212400712-50390b99-b682-4f46-ac0b-c374f27f9b65.png)
+
+React is a JavaScript library for building user interfaces. It allows developers to create custom components and use JSX, a syntax extension for JavaScript, to describe the structure and content of a component. React also allows for easy styling of components using CSS classes. Additionally, React can be used to create static pages for faster loading and improved SEO.
+
+
+
 
