@@ -43,3 +43,15 @@ In this way, we can create multiple instances of a component and pass different 
 ## Airbnb Clone Project Setup
 
 Link to my project repo: [React Airbnb Clone](https://github.com/AshM10/airbnb-clone)
+
+### Challenge 1
+
+1. Navbar
+2. Hero Section
+
+![Screenshot 2023-01-13 at 1 59 31 PM](https://user-images.githubusercontent.com/89284873/212408857-13cf04ef-e730-41f0-89f3-402115349f58.png)
+
+*Process:*
+
+<img width="876" alt="Screenshot 2023-01-13 at 2 40 49 PM" src="https://user-images.githubusercontent.com/89284873/212415224-9cdb8ea3-5cad-4065-bd98-3be2d6a11817.png">
+
