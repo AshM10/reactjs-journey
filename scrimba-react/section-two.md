@@ -38,3 +38,8 @@ class ChildComponent extends React.Component {
 ```
 
 In this way, we can create multiple instances of a component and pass different data to them using props, which can be create using an array.
+
+
+## Airbnb Clone Project Setup
+
+Link to my project repo: [React Airbnb Clone](https://github.com/AshM10/airbnb-clone)
